@@ -1,0 +1,8 @@
+
+services:
+  llm_service:
+    build: .
+    command: ["tail", "-f", "/dev/null"]
+    volumes:
+      - .:/app
+      - /app/.venv
