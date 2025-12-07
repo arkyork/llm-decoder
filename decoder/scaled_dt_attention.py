@@ -21,13 +21,14 @@ def scaled_dot_product_attention(query, key, value, mask=None):
     return out
 
 
-# Example usage
-batch_size = 2
-num_heads = 4
-seq_len = 5
-head_dim = 8
-query = torch.randn(batch_size, num_heads, seq_len, head_dim)
-key = torch.randn(batch_size, num_heads, seq_len, head_dim)
-value = torch.randn(batch_size, num_heads, seq_len, head_dim)
-output = scaled_dot_product_attention(query, key, value)
-print(output)  # Expected output shape: (batch_size, num_heads, seq_len, head_dim)
+if __name__ == "__main__":
+    # Example usage
+    batch_size = 2
+    num_heads = 4
+    seq_len = 5
+    head_dim = 8
+    query = torch.randn(batch_size, num_heads, seq_len, head_dim)
+    key = torch.randn(batch_size, num_heads, seq_len, head_dim)
+    value = torch.randn(batch_size, num_heads, seq_len, head_dim)
+    output = scaled_dot_product_attention(query, key, value)
+    print(output)  # Expected output shape: (batch_size, num_heads, seq_len, head_dim)
