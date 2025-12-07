@@ -7,8 +7,6 @@ def scaled_dot_product_attention(query, key, value, mask=None):
 
     d_k = query.size(-1)
 
-    print(d_k)
-
     score_qk = query @ key.transpose(-2, -1) / (d_k ** 0.5) #  (batch_size, num_heads, seq_len, seq_len)
     
     if mask is not None:

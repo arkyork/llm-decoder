@@ -6,3 +6,9 @@ services:
     volumes:
       - .:/app
       - /app/.venv
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
