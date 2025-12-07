@@ -1,10 +1,22 @@
 import torch
 from torch import nn
 import torch.nn.functional as F
+from typing import Union
 
-def scaled_dot_product_attention(query, key, value, mask=None):
+def scaled_dot_product_attention(
+        query: torch.Tensor, 
+        key: torch.Tensor, 
+        value: torch.Tensor, 
+        mask: Union[None | torch.Tensor] = None) -> torch.Tensor:
+    """Scaled Dot-Product Attention の実装
+    arguments:
+    - query: (batch_size, num_heads, seq_len, head_dim)
+    - key:   (batch_size, num_heads, seq_len, head_dim)
+    - value: (batch_size, num_heads, seq_len, head_dim)
+    - mask:  (1, 1, seq_len, seq_len) or None
+    """
+
     # query, key, value: (batch_size, num_heads, seq_len, head_dim)
-
     d_k = query.size(-1)
 
     score_qk = query @ key.transpose(-2, -1) / (d_k ** 0.5) #  (batch_size, num_heads, seq_len, seq_len)

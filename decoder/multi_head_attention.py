@@ -1,6 +1,7 @@
 from scaled_dt_attention import scaled_dot_product_attention
 import torch
 from torch import nn
+from typing import Union
 
 class MultiHeadAttention(nn.Module):
     def __init__(self, embed_dim, num_heads):
@@ -14,7 +15,18 @@ class MultiHeadAttention(nn.Module):
         self.v_proj = nn.Linear(embed_dim, embed_dim)
         self.out_proj = nn.Linear(embed_dim, embed_dim)
     
-    def forward(self, x, mask = None):
+    def forward(
+            self, 
+            x: torch.Tensor, 
+            mask: Union[None | torch.Tensor] = None
+        ) -> torch.Tensor:
+        
+        """Multi-Head Attention の実装 
+        arguments:
+        - x: (batch_size, seq_len, embed_dim)
+        - mask: (1, 1, seq_len, seq_len) or None
+        """
+
         B,S,C = x.size() # batch size, sequence length, embedding dimension
 
         q = self.q_proj(x)
