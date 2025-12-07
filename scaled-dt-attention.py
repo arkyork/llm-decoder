@@ -11,6 +11,9 @@ def scaled_dot_product_attention(query, key, value, mask=None):
 
     score_qk = query @ key.transpose(-2, -1) / (d_k ** 0.5) #  (batch_size, num_heads, seq_len, seq_len)
     
+    if mask is not None:
+        score_qk = score_qk.masked_fill(mask == 0, float('-inf'))
+
     attention_score = F.softmax(score_qk, dim=-1)
 
     out = attention_score @ value
